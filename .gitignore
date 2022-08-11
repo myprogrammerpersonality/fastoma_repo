@@ -1,3 +1,4 @@
 slurm_job.sh
 logs/*
 temp_results/*
+**/*.pyc
