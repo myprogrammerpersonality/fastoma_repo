@@ -9,4 +9,4 @@ def test_outgroup():
 
 
 def test_outlier():
-    assert 1 == 1
+    assert 1 == 2
