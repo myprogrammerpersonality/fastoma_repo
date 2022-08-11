@@ -11,7 +11,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: 13792000/fastoma:0.1
+    container: 13792000/fastoma:0.1.1
 
     timeout-minutes: 10
 
