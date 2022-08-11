@@ -6,6 +6,7 @@ from itertools import combinations
 import numpy as np
 from ete3 import PhyloTree
 
+
 def get_farthest_leaf(tree: PhyloTree, target_leaf: PhyloTree, leaves_list: List[PhyloTree]) -> Tuple[float, PhyloTree]:
     """
     Given a target leaf it returns the farthest leave to it from a given list of leaves
@@ -40,6 +41,7 @@ def midpoint_rooting_longest_path(tree: PhyloTree, leaves_to_exclude=None) -> Tu
     
     return longest_dist, first_leaf, second_leaf
 
+
 def midpoint_rooting_outgroup(tree: PhyloTree, leaves_to_exclude=None) -> PhyloTree:
     """
     Using midpoint rooting algorithm find the outgroup to be used to root the tree.
@@ -58,6 +60,7 @@ def midpoint_rooting_outgroup(tree: PhyloTree, leaves_to_exclude=None) -> PhyloT
         current_node = current_node.up
         
     return current_node
+
 
 def find_outlier_leaves(tree: PhyloTree):
     distances = defaultdict(list)
