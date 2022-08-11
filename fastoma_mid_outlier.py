@@ -602,6 +602,7 @@ def distribute_rhogs(rhogs: List[Tuple[str, int]], start_index: int, n_workers: 
             temp.append(rhogs[i])
         return temp
 
+
 if __name__ == "__main__":
     
     logging.basicConfig()
@@ -610,7 +611,7 @@ if __name__ == "__main__":
     # make sure addresses end with "/" 
     address_working_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/" 
     address_rhogs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/data/"
-    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles"
+    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_out_test_1/"
     species_tree_address = address_working_folder + "lineage_tree_qfo.phyloxml"
     gene_trees_folder = address_working_folder + "/gene_trees_test_mid/"
     address_logs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/logs/"
