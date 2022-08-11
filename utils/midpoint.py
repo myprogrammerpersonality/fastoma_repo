@@ -12,13 +12,17 @@ def get_farthest_leaf(tree: PhyloTree, target_leaf: PhyloTree, leaves_list: List
     Given a target leaf it returns the farthest leave to it from a given list of leaves
     """
     max_dist = 0
-    max_leaf: PhyloTree
+    max_leaf: PhyloTree = None
     for leaf in leaves_list:
+        if leaf == target_leaf:
+            continue
+        
         dist = tree.get_distance(target_leaf, leaf)
-        if dist > max_dist:
+        if dist >= max_dist:
             max_dist = dist
             max_leaf = leaf
     
+    print('&', max_leaf, max_dist)
     return max_dist, max_leaf
 
 
@@ -35,10 +39,12 @@ def midpoint_rooting_longest_path(tree: PhyloTree, leaves_to_exclude=None) -> Tu
         leaves_list = list(leaves_set)
         
     random_leaf = random.choice(leaves_list)
+    print('&&2', tree, leaves_list, leaves_to_exclude, random_leaf)
     _, first_leaf = get_farthest_leaf(tree=tree, target_leaf=random_leaf, leaves_list=leaves_list)
     _, second_leaf = get_farthest_leaf(tree=tree, target_leaf=first_leaf, leaves_list=leaves_list)
     longest_dist = tree.get_distance(first_leaf, second_leaf)
-    
+
+    print('&&', random_leaf, first_leaf, second_leaf, longest_dist)
     return longest_dist, first_leaf, second_leaf
 
 
@@ -58,7 +64,8 @@ def midpoint_rooting_outgroup(tree: PhyloTree, leaves_to_exclude=None) -> PhyloT
     while current_distance + current_node.dist < distance/2:
         current_distance += current_node.dist
         current_node = current_node.up
-        
+
+    print('&&&', distance, first_leaf, second_leaf, distance_first, distance_second, farther_node, current_node, current_distance) 
     return current_node
 
 
@@ -81,5 +88,5 @@ def find_outlier_leaves(tree: PhyloTree):
     for leaf in distances.keys():
         if sum(distances[leaf]) > threshold:
             outliers.append(leaf)
-    
+    print('+++',distances_agg, q3, q1, iqr, threshold, outliers)
     return outliers
