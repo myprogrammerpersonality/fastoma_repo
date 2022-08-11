@@ -5,7 +5,6 @@ def test_zero_length_tree_1():
     gene_tree = PhyloTree('test_data/zero_tree_1.tree')
     outliers = find_outlier_leaves(gene_tree)
     outgroup = midpoint_rooting_outgroup(gene_tree)
-    assert outgroup == gene_tree.get_midpoint_outgroup()
     outgroup = midpoint_rooting_outgroup(gene_tree, outliers)
 
 
@@ -13,7 +12,6 @@ def test_zero_length_tree_2():
     gene_tree = PhyloTree('test_data/zero_tree_2.tree')
     outliers = find_outlier_leaves(gene_tree)
     outgroup = midpoint_rooting_outgroup(gene_tree)
-    assert outgroup == gene_tree.get_midpoint_outgroup()
     outgroup = midpoint_rooting_outgroup(gene_tree, outliers)
 
 
