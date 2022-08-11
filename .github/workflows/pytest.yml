@@ -11,6 +11,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    container: bitnami/pytorch:latest
+
     timeout-minutes: 10
 
     steps:
@@ -28,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo hi
+          pip freeze
       
       - name: Run PyTest
         run: |
