@@ -6,10 +6,10 @@ import dill as pickle
 
 address_working_folder="/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/" 
 address_group_xml = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/group_xml_ortho.pickle"
-address_pickle_folder = address_working_folder + "/pickles/mid_out_test_1/"
+address_pickle_folder = address_working_folder + "/pickles/mid_no_merge_1/"
 
 pickle_files = listdir(address_pickle_folder)
-print("num picke files", len(pickle_files))
+print("num pickle files", len(pickle_files))
 
 with open(address_group_xml, 'rb') as handle:
     (groups_xml, gene_id_name, orthoxml_file) = pickle.load(handle)
@@ -26,7 +26,7 @@ print("done1")
 
 xml_str = minidom.parseString(ET.tostring(orthoxml_file)).toprettyxml(indent="   ")
 
-output_xml_name= address_working_folder + "/orthoxmls/mid_outlier_excpet_3_qfo.xml"
+output_xml_name= address_working_folder + "/orthoxmls/mid_no_merge_all_qfo.xml"
 with open(output_xml_name, "w") as file_out:
     file_out.write(xml_str)
 

@@ -97,7 +97,7 @@ def merge_msa(list_msas):
     logging.debug(list_msas)
     logging.debug(str(list_msas[0][0].id)+"\n")
     wrapper_mafft_merge = mafft.Mafft(list_msas, datatype="PROTEIN") 
-    wrapper_mafft_merge.options['--merge'].active = True
+    wrapper_mafft_merge.options['--merge'].active = False
     merged = wrapper_mafft_merge()
     logger_hog.info(str(len(list_msas))+" msas are merged into one with the length of "+str(len(merged))+" "+str(len(merged[0])) )
     return merged
@@ -393,9 +393,7 @@ def infer_HOG_thisLevel(node_species_tree, rhog_i, species_names_rhog, dic_sub_h
         logger_hog.info("Gene tree is infered with length of "+str(len(gene_tree))+".")
         #gene_tree_i +=1
 
-        outliers = find_outlier_leaves(gene_tree)
-        print('&&&', len(outliers), len(gene_tree.get_leaves()))
-        R = midpoint_rooting_outgroup(gene_tree, leaves_to_exclude=outliers)
+        R = gene_tree.get_midpoint_outgroup()
         gene_tree.set_outgroup(R)
 
         gene_tree = lable_SD_internal_nodes(gene_tree)
@@ -602,7 +600,6 @@ def distribute_rhogs(rhogs: List[Tuple[str, int]], start_index: int, n_workers: 
             temp.append(rhogs[i])
         return temp
 
-
 if __name__ == "__main__":
     
     logging.basicConfig()
@@ -611,11 +608,11 @@ if __name__ == "__main__":
     # make sure addresses end with "/" 
     address_working_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/" 
     address_rhogs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/data/"
-    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_out_test_2/"
+    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_no_merge_1/"
     species_tree_address = address_working_folder + "lineage_tree_qfo.phyloxml"
     gene_trees_folder = address_working_folder + "/gene_trees_test_mid/"
     address_logs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/logs/"
-    
+
     this_worker_index = int(sys.argv[1])
     n_workers = int(sys.argv[2])
 

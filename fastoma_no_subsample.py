@@ -393,9 +393,7 @@ def infer_HOG_thisLevel(node_species_tree, rhog_i, species_names_rhog, dic_sub_h
         logger_hog.info("Gene tree is infered with length of "+str(len(gene_tree))+".")
         #gene_tree_i +=1
 
-        outliers = find_outlier_leaves(gene_tree)
-        print('&&&', len(outliers), len(gene_tree.get_leaves()))
-        R = midpoint_rooting_outgroup(gene_tree, leaves_to_exclude=outliers)
+        R = gene_tree.get_midpoint_outgroup()
         gene_tree.set_outgroup(R)
 
         gene_tree = lable_SD_internal_nodes(gene_tree)
@@ -488,11 +486,10 @@ class HOG:
             
             max_num_seq=30 # subsampling in msa 
             records_full = [record for record in msa if record.id in self._members]
-            if len(records_full)> max_num_seq: 
-                records_sub_sampled = sample(records_full, max_num_seq)   #  without replacement.
-                logger_hog.info("we are doing subsamping now from "+str(len(records_full))+" to "+str(max_num_seq)+"seqs.")
-            else:
-                records_sub_sampled = records_full
+            
+            # No subsampling for this
+            records_sub_sampled = records_full
+            
             # removing some columns completely gap -  (not x   )
             # now select those proteins 
             self._msa =  MultipleSeqAlignment(records_sub_sampled)
@@ -602,7 +599,6 @@ def distribute_rhogs(rhogs: List[Tuple[str, int]], start_index: int, n_workers: 
             temp.append(rhogs[i])
         return temp
 
-
 if __name__ == "__main__":
     
     logging.basicConfig()
@@ -611,11 +607,11 @@ if __name__ == "__main__":
     # make sure addresses end with "/" 
     address_working_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/" 
     address_rhogs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/data/"
-    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_out_test_2/"
+    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_no_subsample_1/"
     species_tree_address = address_working_folder + "lineage_tree_qfo.phyloxml"
     gene_trees_folder = address_working_folder + "/gene_trees_test_mid/"
     address_logs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/logs/"
-    
+
     this_worker_index = int(sys.argv[1])
     n_workers = int(sys.argv[2])
 

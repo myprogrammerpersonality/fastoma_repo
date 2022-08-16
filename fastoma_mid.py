@@ -393,7 +393,6 @@ def infer_HOG_thisLevel(node_species_tree, rhog_i, species_names_rhog, dic_sub_h
         logger_hog.info("Gene tree is infered with length of "+str(len(gene_tree))+".")
         #gene_tree_i +=1
 
-        # get a random node and root on it
         R = midpoint_rooting_outgroup(gene_tree)
         gene_tree.set_outgroup(R)
 
@@ -609,11 +608,11 @@ if __name__ == "__main__":
     # make sure addresses end with "/" 
     address_working_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/" 
     address_rhogs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/data/"
-    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles"
+    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_my_test_1/"
     species_tree_address = address_working_folder + "lineage_tree_qfo.phyloxml"
     gene_trees_folder = address_working_folder + "/gene_trees_test_mid/"
     address_logs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/logs/"
-    
+
     this_worker_index = int(sys.argv[1])
     n_workers = int(sys.argv[2])
 
