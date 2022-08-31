@@ -393,7 +393,7 @@ def infer_HOG_thisLevel(node_species_tree, rhog_i, species_names_rhog, dic_sub_h
         logger_hog.info("Gene tree is infered with length of "+str(len(gene_tree))+".")
         #gene_tree_i +=1
 
-        R = midpoint_rooting_outgroup(gene_tree)
+        R = gene_tree.get_midpoint_outgroup()
         gene_tree.set_outgroup(R)
 
         gene_tree = lable_SD_internal_nodes(gene_tree)
@@ -607,16 +607,16 @@ if __name__ == "__main__":
     logger_hog.setLevel(logging.INFO) # WARN  
     # make sure addresses end with "/" 
     address_working_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/" 
-    address_rhogs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma-dask/data/"
-    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_my_test_1/"
+    address_rhogs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/family-score-adjusted/AdjustedFamilyScore_All_rHOGs/" 
+    address_pickles_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/temp_results/pickles/mid_adjustedfamily_40_1/"
     species_tree_address = address_working_folder + "lineage_tree_qfo.phyloxml"
     gene_trees_folder = address_working_folder + "/gene_trees_test_mid/"
     address_logs_folder = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/fastoma_repo/logs/"
-
+    address_group_xml_ortho = "/work/FAC/FBM/DBC/cdessim2/default/ayazdiza/family-score-adjusted/group_xml_ortho_adjusted_family_40.pickle"
     this_worker_index = int(sys.argv[1])
     n_workers = int(sys.argv[2])
 
-    with open(address_working_folder + "group_xml_ortho.pickle", 'rb') as handle:
+    with open(address_group_xml_ortho, 'rb') as handle:
         (groups_xml, gene_id_name, orthoxml_file) = pickle.load(handle)
     
     ## create a list of rootHOG IDs  stored in the folder of rHOG .

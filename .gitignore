@@ -1,5 +1,4 @@
 # My Customized ignore list
-slurm_job.sh
 logs/*
 temp_results/*
 
