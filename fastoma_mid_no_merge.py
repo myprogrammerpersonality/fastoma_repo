@@ -49,7 +49,7 @@ def read_species_tree(species_tree_address):
             node_species_tree.name = temp1.get_code()
     #print(len(species_tree)); print(species_tree)
     return (species_tree)   
-        
+  
 def prepare_species_tree(rhog_i, species_tree):
     """
     a function for extracting a subtree from the input species tree  a.k.a pruning,
